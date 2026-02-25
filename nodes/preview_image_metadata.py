@@ -47,7 +47,7 @@ def _tensor_to_pil(img: Any) -> Image.Image:
     return pil
 
 
-class PreviewImageWithMetadata:
+class PreviewImageNoMetadata:
 
     @classmethod
     def INPUT_TYPES(cls):
