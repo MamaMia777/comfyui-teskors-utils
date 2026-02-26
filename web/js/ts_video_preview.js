@@ -162,9 +162,9 @@ function addVideoPreview(nodeType, isInput = true) {
     element.appendChild(w.parentEl);
 
     w.videoEl = document.createElement("video");
-    w.videoEl.controls = true;   // чтобы можно было руками регулировать громкость/пауза
+    w.videoEl.controls = true;   
     w.videoEl.loop = true;
-    w.videoEl.muted = false;     // ВАЖНО: всегда со звуком
+    w.videoEl.muted = false;  
     w.videoEl.volume = 1.0;
     w.videoEl.style.width = "100%";
     w.videoEl.playsInline = true;
@@ -225,17 +225,14 @@ function addVideoPreview(nodeType, isInput = true) {
       const fmt = params.format || "";
       const major = fmt.split("/")[0];
 
-      // VHS Advanced Previews settings
       let advp = getSetting("VHS.AdvancedPreviews", "Input Only");
       if (advp === "Never") advp = false;
       else if (advp === "Input Only") advp = !!isInput;
       else advp = true;
 
-      // video/*
       if (major === "video" || fmt === "folder" || (advp && fmt.split("/")[1] === "gif")) {
         this.videoEl.autoplay = !this.value.paused && !this.value.hidden;
 
-        // всегда держим unmuted
         this.videoEl.muted = false;
 
         if (!advp) {
@@ -254,7 +251,6 @@ function addVideoPreview(nodeType, isInput = true) {
 
           params.deadline = getSetting("VHS.AdvancedPreviewsDeadline", 0);
 
-          // лучшее превью (и если есть аудиотрек — он будет)
           this.videoEl.src = api.apiURL("/vhs/viewvideo?" + new URLSearchParams(params));
         }
 
@@ -263,7 +259,6 @@ function addVideoPreview(nodeType, isInput = true) {
         return;
       }
 
-      // image/*
       if (major === "image") {
         this.imgEl.src = api.apiURL("/view?" + new URLSearchParams(params));
         this.videoEl.hidden = true;
@@ -346,7 +341,6 @@ function addPreviewOptions(nodeType) {
       },
     });
 
-    // НИКАКОГО Mute/Unmute тут нет — по твоему запросу
 
     options.unshift(...optNew);
   });
@@ -363,7 +357,6 @@ app.registerExtension({
       if (message?.gifs?.length) {
         const p = message.gifs[0];
 
-        // если вкладка скрыта — сохраняем и применяем когда вернёмся
         if (document.hidden) {
           this.__pendingPreviewParams = p;
           return;
