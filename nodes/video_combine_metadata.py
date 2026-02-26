@@ -350,7 +350,7 @@ BUILTIN_VIDEO_FORMATS: Dict[str, Dict[str, Any]] = {
             ],
         ],
         "save_metadata": ["save_metadata", "BOOLEAN", {"default": True}],
-        "trim_to_audio": ["trim_to_audio", "BOOLEAN", {"default": False}],
+        "trim_to_audio": ["trim_to_audio", "BOOLEAN", {"default": True}],
     },
     "gifski": {
         "extension": "gif",
@@ -381,7 +381,7 @@ BUILTIN_VIDEO_FORMATS: Dict[str, Dict[str, Any]] = {
             "bt709",
         ],
         "save_metadata": ["save_metadata", "BOOLEAN", {"default": True}],
-        "trim_to_audio": ["trim_to_audio", "BOOLEAN", {"default": False}],
+        "trim_to_audio": ["trim_to_audio", "BOOLEAN", {"default": True}],
     },
     "h265-mp4": {
         "audio_pass": ["-c:a", "aac"],
@@ -515,7 +515,7 @@ BUILTIN_VIDEO_FORMATS: Dict[str, Dict[str, Any]] = {
             "bt709",
         ],
         "save_metadata": ["save_metadata", "BOOLEAN", {"default": True}],
-        "trim_to_audio": ["trim_to_audio", "BOOLEAN", {"default": False}],
+        "trim_to_audio": ["trim_to_audio", "BOOLEAN", {"default": True}],
     },
 }
 
@@ -1247,7 +1247,7 @@ class TSVideoCombineNoMetadata:
                 min_audio_dur = total_frames_output / frame_rate + 1
                 apad = (
                     []
-                    if video_format.get("trim_to_audio", "False") != "False"
+                    if video_format.get("trim_to_audio", "True") != "False"
                     else ["-af", f"apad=whole_dur={min_audio_dur}"]
                 )
 
