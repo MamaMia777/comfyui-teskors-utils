@@ -164,7 +164,7 @@ function addVideoPreview(nodeType, isInput = true) {
     w.videoEl = document.createElement("video");
     w.videoEl.controls = true;   
     w.videoEl.loop = true;
-    w.videoEl.muted = false;  
+    w.videoEl.muted = true;  
     w.videoEl.volume = 1.0;
     w.videoEl.style.width = "100%";
     w.videoEl.playsInline = true;
@@ -233,7 +233,7 @@ function addVideoPreview(nodeType, isInput = true) {
       if (major === "video" || fmt === "folder" || (advp && fmt.split("/")[1] === "gif")) {
         this.videoEl.autoplay = !this.value.paused && !this.value.hidden;
 
-        this.videoEl.muted = false;
+        this.videoEl.muted = true;
 
         if (!advp) {
           this.videoEl.src = api.apiURL("/view?" + new URLSearchParams(params));
